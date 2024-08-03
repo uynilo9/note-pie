@@ -1,0 +1,41 @@
+{
+	"type": "module",
+	"scripts": {
+		"v:dev": "vite",
+		"v:build": "vue-tsc --noEmit && vite build",
+		"v:preview": "vite preview"
+	},
+	"dependencies": {
+		"@milkdown/core": "^7.4.0",
+		"@milkdown/ctx": "^7.4.0",
+		"@milkdown/plugin-block": "^7.4.1",
+		"@milkdown/plugin-clipboard": "^7.4.0",
+		"@milkdown/plugin-cursor": "^7.4.0",
+		"@milkdown/plugin-emoji": "^7.4.0",
+		"@milkdown/plugin-history": "^7.4.0",
+		"@milkdown/plugin-indent": "^7.4.0",
+		"@milkdown/plugin-prism": "^7.4.0",
+		"@milkdown/preset-commonmark": "^7.4.0",
+		"@milkdown/prose": "^7.4.0",
+		"@milkdown/theme-nord": "^7.4.0",
+		"@milkdown/transformer": "^7.4.0",
+		"@milkdown/vue": "^7.4.0",
+		"date-fns": "^3.6.0",
+		"pinia": "^2.2.0",
+		"prism-themes": "^1.9.0",
+		"refractor": "^4.8.1",
+		"vue": "^3.4.34",
+		"vue-router": "4"
+	},
+	"devDependencies": {
+		"@babel/types": "^7.24.9",
+		"@iconify-json/humbleicons": "^1.1.10",
+		"@iconify-json/tabler": "^1.1.118",
+		"@types/node": "^20.14.12",
+		"@vitejs/plugin-vue": "^5.1.0",
+		"typescript": "^5.5.4",
+		"unocss": "^0.61.5",
+		"vite": "^5.3.4",
+		"vue-tsc": "^2.0.28"
+	}
+}

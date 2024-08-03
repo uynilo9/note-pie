@@ -1,0 +1,20 @@
+{
+	"$schema": "https://wails.io/schemas/config.v2.json",
+	"name": "note-pie",
+	"outputfilename": "Note-pie",
+	"frontend:install": "bun install",
+	"frontend:build": "bun v:build",
+	"frontend:dev:watcher": "bun v:dev",
+	"frontend:dev:serverUrl": "http://localhost:5173",
+	"info": {
+		"productName": "Note-pie",
+		"productVersion": "0.0.1",
+		"companyName": "@uynilo9",
+		"copyright": "Apache License 2.0",
+		"comments": "@uynilo9 https://uynilo9.is-a.dev"
+	},
+	"author": {
+		"name": "uynilo9",
+		"email": "uynilo9@outlook.com"
+	}
+}

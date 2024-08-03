@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Quicksand', sans-serif;
+}
+
+*::-webkit-scrollbar {
+	display: none;
+}
+
+body {
+	background: rgba(40, 40, 40, 0.5);
+}
+
+.milkdown .editor {
+	min-width: 100%;
+}
+
+.milkdown .editor > p {
+	margin: 0.5rem 0;
+}
+
+.milkdown .editor > blockquote {
+	margin: 0.5rem 0;
+}
+
+.milkdown .editor > pre {
+	margin: 0.5rem 0;
+	padding: 1rem 1rem;
+	background: rgba(25, 25, 25, 0.5);
+	line-height: 1.25rem;
+}
