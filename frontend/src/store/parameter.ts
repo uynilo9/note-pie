@@ -13,7 +13,6 @@ export const useParameterStore = pinia.defineStore('parameter', () => {
 		update: _Update,
 		about: _About,
 	};
-	vue.defineComponent;
 
 	const shownParameter: vue.Ref<Parameter> = vue.ref('about');
 

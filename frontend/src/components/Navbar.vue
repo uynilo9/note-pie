@@ -7,18 +7,20 @@
 
 	import * as store from '@store/stores';
 	const pageStore = store.usePageStore();
+	const navbarStore = store.useNavbarStore();
 	const sidebarStore = store.useSidebarStore();
 
-	import * as vue from 'vue';
-	const isWindowMaximised = vue.ref(false);
-	window.onresize = () => {
+	const checkIfChangeWindowMaximised = () => {
 		if (
 			screen.availWidth == window.outerWidth &&
 			screen.availHeight == window.outerHeight
 		)
-			isWindowMaximised.value = true;
-		else isWindowMaximised.value = false;
+			navbarStore.isWindowMaximised = true;
+		else navbarStore.isWindowMaximised = false;
 	};
+	window.ondrag = checkIfChangeWindowMaximised;
+	window.onresize = checkIfChangeWindowMaximised;
+	window.onauxclick = checkIfChangeWindowMaximised;
 </script>
 <template>
 	<div
@@ -53,7 +55,6 @@
 					*:text-4 *:font-bold *:cursor-default *:select-none
 				"
 				:class="sidebarStore.isSidebarClosed ? 'opacity-0 duration-75 pointer-events-none' : 'opacity-100 delay-200 duration-200'"
-
 			>
 				<p>|</p>
 				<p>{{ pageStore.shownPageTitle }}</p>
@@ -72,7 +73,7 @@
 				@click="WindowMinimise()"
 			></div>
 			<div
-				v-if="isWindowMaximised"
+				v-if="navbarStore.isWindowMaximised"
 				title="Unmaximise"
 				class="navbar-icon-unmaximise"
 				@click="WindowToggleMaximise()"
