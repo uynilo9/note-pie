@@ -1,7 +1,6 @@
 import * as vue from 'vue';
 
 import App from '@/App.vue';
-import '@assets/style.css';
 import 'virtual:uno.css';
 
 import * as pinia from 'pinia';

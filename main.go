@@ -20,7 +20,7 @@ func main() {
 	err := wails.Run(
 		&options.App{
 			Title: "Note-pie",
-			Width:  1280,
+			Width:  1000,
 			Height: 720,
 			Frameless: true,
 

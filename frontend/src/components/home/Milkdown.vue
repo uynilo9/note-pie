@@ -57,6 +57,9 @@
 				});
 			});
 	});
+
+	// TODO: Use store here
+	const colour = '#81a1c1';
 </script>
 <template>
 	<Milkdown
@@ -64,3 +67,35 @@
 		spellcheck="false"
 	/>
 </template>
+<style lang="sass">
+	.milkdown .editor
+		min-width: 100%
+
+		p
+			margin: 0.5rem 0
+			line-height: 1rem
+
+		h1, h2
+			margin: 1rem 0
+			line-height: 2rem
+
+		h3, h4
+			margin: 0.75rem 0
+			line-height: 1.25rem
+
+		ul, ol
+			margin: 0.75rem 0
+
+			li::marker
+				color: v-bind(colour)
+
+		blockquote
+			margin: 0.5rem 0
+			border-color: v-bind(colour)
+
+		pre
+			margin: 0.5rem 0
+			padding: 1rem 1rem
+			background: rgba(25, 25, 25, 0.5)
+			line-height: 1.25rem
+</style>

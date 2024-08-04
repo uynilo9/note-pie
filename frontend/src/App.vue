@@ -4,3 +4,16 @@
 <template>
 	<View />
 </template>
+<style lang="sass">
+	*
+		margin: 0
+		padding: 0
+		box-sizing: border-box
+		font-family: 'Quicksand', sans-serif
+
+		::-webkit-scrollbar
+			display: none
+
+	body
+		background: rgba(40, 40, 40, 0.5)
+</style>
