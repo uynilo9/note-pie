@@ -13,7 +13,7 @@ import Parameters from '@views/Parameters.vue';
 
 const history = vrouter.createMemoryHistory();
 const routes = [
-	{ path: '/', component: Home },
+	{ path: '/', alias: '/note-pie', component: Home },
 	{ path: '/parameters', component: Parameters },
 ];
 const router = vrouter.createRouter({ history, routes });

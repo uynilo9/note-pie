@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 	import Layout from '@layouts/Layout.vue';
+	import Sidebar from '@layouts/Sidebar.vue';
+	import Content from '@layouts/Content.vue';
+
 	import Menu from '@components/parameters/Menu.vue';
 
 	import * as store from '@store/stores';
@@ -7,11 +10,11 @@
 </script>
 <template>
 	<Layout>
-		<template #sidebar>
+		<Sidebar>
 			<Menu />
-		</template>
-		<template #content>
-			<parameterStore.Parameter />
-		</template>
+		</Sidebar>
+		<Content>
+			<parameterStore.Parameter class="text-light" />
+		</Content>
 	</Layout>
 </template>

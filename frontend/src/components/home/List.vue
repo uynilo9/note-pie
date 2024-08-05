@@ -9,6 +9,7 @@
 	import * as datefns from 'date-fns';
 
 	vue.watchEffect(() => {
+		// TODO: Use store here
 		rawNoteInfos.value.forEach((note) => {
 			note.formattedEditedTime = datefns.format(note.rawEditedTime, 'HH:mm - MMM Qo, yyyy')
 		});
@@ -23,7 +24,7 @@
 	});
 </script>
 <template>
-	<div class="flex flex-col gap-2">
+	<div class="max-h-inherit flex flex-col gap-1.5 overflow-auto">
 		<div
 			v-for="noteInfo in noteInfos"
 			class="

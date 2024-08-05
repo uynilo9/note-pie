@@ -10,6 +10,14 @@
 	const navbarStore = store.useNavbarStore();
 	const sidebarStore = store.useSidebarStore();
 
+	import * as vrouter from 'vue-router';
+	const router = vrouter.useRouter();
+
+	const goToPage = (targetPage: Page) => {
+		router.push(`/${targetPage}`);
+		pageStore.goToPage(targetPage);
+	};
+
 	const checkIfChangeWindowMaximised = () => {
 		if (
 			screen.availWidth == window.outerWidth &&
@@ -24,69 +32,67 @@
 </script>
 <template>
 	<div
-		class="absolute w-screen h-8 flex justify-between"
+		class="absolute w-screen h-8 flex"
 		style="--wails-draggable: drag"
 		@dblclick="WindowToggleMaximise()"
 	>
 		<div
 			class="
-				flex
-				*:my-auto [&>a]:mx-2 [&>a]:text-5 *:text-gray-500 [&>a]:transition-colors [&>a]:duration-250 [&>a]:ease-in-out [&>a]:cursor-pointer [&>a:hover]:text-light-500
+				flex justify-start transition-[w] duration-400 ease-in-out
 			"
-			style="--wails-draggable: no-drag"
+			:class="sidebarStore.isSidebarClosed ? 'w-9' : 'w-70'"
 		>
-			<RouterLink
-				v-if="pageStore.shownPage !== 'parameters'"
-				to="/parameters"
-				title="Parameters"
-				class="navbar-icon-parameters"
-				@click="pageStore.goToPage('parameters')"
-			/>
-			<RouterLink
-				v-else
-				to="/"
-				title="Back"
-				class="navbar-icon-leave-for-home"
-				@click="pageStore.goToPage('note-pie')"
-			/>
 			<div
-				class="
-					flex gap-2 transition-opacity delay-10 duration-300 ease-in-out
-					*:text-4 *:font-bold *:cursor-default *:select-none
-				"
-				:class="sidebarStore.isSidebarClosed ? 'opacity-0 duration-75 pointer-events-none' : 'opacity-100 delay-200 duration-200'"
+				class="my-auto mx-2 text-5 text-gray-500 transition-colors duration-250 ease-in-out cursor-pointer [&>*:hover]:text-light-500"
 			>
-				<p>|</p>
-				<p>{{ pageStore.shownPageTitle }}</p>
+				<div
+					v-if="pageStore.shownPage !== 'parameters'"
+					title="Parameters"
+					class="navbar-icon-parameters"
+					style="--wails-draggable: no-drag;"
+					@click="goToPage('parameters')"
+				>
+				</div>
+				<div
+					v-else
+					title="Back"
+					class="navbar-icon-leave-for-home"
+					style="--wails-draggable: no-drag;"
+					@click="goToPage('note-pie')"
+				>
+				</div>
 			</div>
 		</div>
 		<div
 			class="
-				flex
+				flex flex-1 justify-end bg-dark-700/50 border-l-solid border-l-gray-500/5
 				*:my-auto *:px-5 *:text-5 *:text-gray-500 *:transition-colors *:duration-250 *:ease-in-out *:cursor-pointer [&>*:hover]:text-light-500
 			"
-			style="--wails-draggable: no-drag"
 		>
 			<div
 				title="Minimise"
 				class="navbar-icon-minimise !text-5.5"
+				style="--wails-draggable: no-drag"
 				@click="WindowMinimise()"
 			></div>
 			<div
 				v-if="navbarStore.isWindowMaximised"
 				title="Unmaximise"
 				class="navbar-icon-unmaximise"
+				style="--wails-draggable: no-drag"
 				@click="WindowToggleMaximise()"
 			></div>
 			<div
 				v-else
 				title="Maximise"
 				class="navbar-icon-maximise !text-4.5"
+				style="--wails-draggable: no-drag"
 				@click="WindowToggleMaximise()"
 			></div>
 			<div
 				title="Quit"
 				class="navbar-icon-quit hover:text-red-500"
+				style="--wails-draggable: no-drag"
 				@click="Quit()"
 			></div>
 		</div>

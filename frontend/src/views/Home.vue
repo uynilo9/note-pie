@@ -1,17 +1,18 @@
 <script lang="ts" setup>
 	import Layout from '@layouts/Layout.vue';
-	import Toolbar from '@components/home/Toolbar.vue';
+	import Sidebar from '@layouts/Sidebar.vue';
+	import Content from '@layouts/Content.vue';
+
 	import List from '@components/home/List.vue';
 	import Editor from '@components/home/Editor.vue';
 </script>
 <template>
 	<Layout>
-		<template #sidebar>
-			<Toolbar />
+		<Sidebar>
 			<List />
-		</template>
-		<template #content>
+		</Sidebar>
+		<Content>
 			<Editor />
-		</template>
+		</Content>
 	</Layout>
 </template>

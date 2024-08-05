@@ -1,37 +1,27 @@
 <script lang="ts" setup>
+	import Footer from '@components/Footer.vue';
+	import Toolbar from '@components/home/Toolbar.vue';
+
 	import * as store from '@store/stores';
+	const pageStore = store.usePageStore();
 	const sidebarStore = store.useSidebarStore();
 </script>
 <template>
 	<div
-		class="px-2.5 h-full overflow-scroll transition-[w] duration-400 ease-in-out"
+		class="mt-15 mb-8 px-2.5 max-h-[100vh-2rem] overflow-scroll transition-[w] duration-400 ease-in-out"
 		:class="sidebarStore.isSidebarClosed ? 'w-9' : 'w-70'"
 	>
 		<div
-			class="h-inherit transition-opacity ease-in-out"
-			:class="sidebarStore.isSidebarClosed ? 'opacity-0 duration-100 pointer-events-none' : 'opacity-100 delay-200 duration-200'"
+			class="transition-opacity ease-in-out"
+			:class="sidebarStore.isSidebarClosed ? 'opacity-0 duration-150 pointer-events-none' : 'opacity-100 delay-100 duration-250'"
 		>
+			<Toolbar
+				class="transition-[w] duration-400"
+				v-if="pageStore.shownPage === 'note-pie'"
+				:class="sidebarStore.isSidebarClosed ? 'w-9' : 'w-70'"
+			/>
 			<slot></slot>
 		</div>
-		<div class="absolute w-inherit h-8 flex inset-l-0 inset-b-0">
-			<div
-				class="
-					my-auto px-2
-					*:text-5 *:text-gray-500 *:transition-colors *:duration-250 *:ease-in-out *:cursor-pointer *:hover:text-light-500
-				"
-				@click="sidebarStore.toggleSidebar()"
-			>
-				<div
-					v-if="sidebarStore.isSidebarClosed"
-					title="Open"
-					class="footer-icon-open-sidebar"
-				></div>
-				<div
-					v-else
-					title="Close"
-					class="footer-icon-close-sidebar"
-				></div>
-			</div>
-		</div>
+		<Footer />
 	</div>
 </template>

@@ -3,7 +3,7 @@
 	const parameterStore = store.useParameterStore();
 </script>
 <template>
-	<div class="h-screen flex flex-col gap-2 justify-center items-center">
+	<div class="h-inherit flex flex-col gap-2 justify-center items-center">
 		<a
 			v-for="_, parameter in parameterStore.parameters"
 			class="text-4 no-underline transition-colors duration-250 ease-in-out cursor-pointer"

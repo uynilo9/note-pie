@@ -63,7 +63,7 @@
 </script>
 <template>
 	<Milkdown
-		class="min-w-100% min-h-100% outline-none caret-[#81a1c1] selection:bg-[#81a1c1]/50 prose prose-light"
+		class="min-w-100% outline-none caret-[#81a1c1] selection:bg-[#81a1c1]/50 prose prose-light"
 		spellcheck="false"
 	/>
 </template>

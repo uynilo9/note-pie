@@ -6,7 +6,7 @@
 	const foldername = vue.ref('foo');
 </script>
 <template>
-	<div class="my-2 flex justify-between">
+	<div class="absolute my-1 px-3 h-2 flex inset-0 inset-t-8 justify-between">
 		<div class="flex gap-1 text-gray-400 select-none">
 			<div
 				title="Directory"
