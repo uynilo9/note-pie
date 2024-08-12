@@ -29,6 +29,11 @@
 	window.ondrag = checkIfChangeWindowMaximised;
 	window.onresize = checkIfChangeWindowMaximised;
 	window.onauxclick = checkIfChangeWindowMaximised;
+
+	// TODO:
+	const NOT_IMPLEMENT_YET = () => {
+		alert('Not implement yet');
+	}
 </script>
 <template>
 	<div
@@ -43,14 +48,17 @@
 			:class="sidebarStore.isSidebarClosed ? 'w-9' : 'w-70'"
 		>
 			<div
-				class="my-auto mx-2 text-5 text-gray-500 transition-colors duration-250 ease-in-out cursor-pointer [&>*:hover]:text-light-500"
+				class="
+					my-auto mx-2 text-5 text-gray-500
+					*:transition-colors *:duration-250 *:ease-in-out *:cursor-pointer [&>*:hover]:text-light-500
+				"
 			>
 				<div
 					v-if="pageStore.shownPage !== 'parameters'"
 					title="Parameters"
 					class="navbar-icon-parameters"
 					style="--wails-draggable: no-drag;"
-					@click="goToPage('parameters')"
+					@click="NOT_IMPLEMENT_YET() /* TODO:goToPage('parameters')*/"
 				>
 				</div>
 				<div

@@ -1,12 +1,18 @@
 <script lang="ts" setup>
 	import Button from '@components/Button.vue';
 
+	import * as store from '@store/stores';
+	const sidebarStore = store.useSidebarStore();
+
 	import * as vue from 'vue';
 	// TODO: Use store here
 	const foldername = vue.ref('foo');
 </script>
 <template>
-	<div class="absolute my-1 px-3 h-2 flex inset-0 inset-t-8 justify-between">
+	<div
+		class="absolute my-1 px-3 h-2 flex inset-0 inset-t-8 justify-between transition-[w] duration-400"
+		:class="sidebarStore.isSidebarClosed ? 'w-9' : 'w-70'"
+	>
 		<div class="flex gap-1 text-gray-400 select-none">
 			<div
 				title="Directory"

@@ -3,6 +3,7 @@
 
 	import * as milkdown from '@milkdown/vue';
 	import { Editor, rootCtx, defaultValueCtx } from '@milkdown/core';
+	import { replaceAll } from '@milkdown/utils';
 	import { history, historyKeymap } from '@milkdown/plugin-history';
 	import { indent , indentConfig, IndentConfigOptions } from '@milkdown/plugin-indent';
 	import { cursor } from '@milkdown/plugin-cursor';
@@ -11,7 +12,8 @@
 	import { nord } from '@milkdown/theme-nord';
 	import '@milkdown/theme-nord/style.css';
 	import { prism, prismConfig } from '@milkdown/plugin-prism';
-	import 'prism-themes/themes/prism-nord.css'
+	// TODO: Use store here
+	import '@assets/themes/nord.min.css';
 
 	import md from 'refractor/lang/markdown';
 	import css from 'refractor/lang/css';
@@ -20,9 +22,18 @@
 	import jsx from 'refractor/lang/jsx';
 	import tsx from 'refractor/lang/tsx';
 	import go from 'refractor/lang/go';
+	// TODO: Use store here
 	const langs = [md, css, js, ts, jsx, tsx, go];
 
-	milkdown.useEditor((root) => {
+	// TODO: Use store here
+	const colour = '#81a1c1';
+
+	import * as vue from 'vue';
+
+	import * as store from '@store/stores';
+	const noteStore = store.useNoteStore();
+
+	const editor = milkdown.useEditor((root) => {
 		return Editor.make()
 			.config((context) => {
 				context.set(rootCtx, root);
@@ -58,8 +69,9 @@
 			});
 	});
 
-	// TODO: Use store here
-	const colour = '#81a1c1';
+	vue.watchEffect(() => {
+		editor.get()?.action(replaceAll(noteStore.selectedNoteContent ?? ''));
+	});
 </script>
 <template>
 	<Milkdown

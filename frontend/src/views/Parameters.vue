@@ -14,7 +14,9 @@
 			<Menu />
 		</Sidebar>
 		<Content>
-			<parameterStore.Parameter class="text-light" />
+			<parameterStore.Parameter
+				class="text-light"
+			/>
 		</Content>
 	</Layout>
 </template>
