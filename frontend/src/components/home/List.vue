@@ -5,15 +5,18 @@
 	const noteStore = store.useNoteStore();
 </script>
 <template>
-	<div class="
-		max-h-inherit flex flex-col gap-1.5 overflow-auto
-		*:px-2.5 *:py-2 *:w-full *:h-17.5 *:flex *:flex-col *:text-light-500 *:rounded-md
-		*:transition-colors *:duration-200 *:ease-in-out *:cursor-pointer [&>*:hover]:hover:bg-zinc-600/50
-	">
+	<div
+		v-if="!noteStore.noNoteData"
+		class="
+			max-h-inherit flex flex-col gap-1.5 overflow-auto
+			*:px-2 *:py-2 *:w-full *:h-17.5 *:flex *:flex-col *:text-light-500 *:rounded-md
+			*:transition-colors *:duration-200 *:ease-in-out *:cursor-pointer [&>*:hover]:hover:bg-zinc-600/50
+		"
+	>
 		<div
 			v-for="note in noteStore.orderedNoteList"
 			class="*:my-auto *:select-none"
-			:class="note.info.rawIndex === noteStore.selectedNoteRawIndex ? 'bg-zinc-600/50' : ''"
+			:class="note.info.rawIndex === noteStore.selectedNoteIndex ? 'bg-zinc-600/50' : ''"
 			@click="noteStore.selectNote(note.info.rawIndex)"
 		>
 			<b class="text-4 truncate">{{ note.info.title }}</b>
@@ -33,5 +36,12 @@
 				/>
 			</div>
 		</div>
+	</div>
+	<div
+		v-else
+		class="flex text-3.5 text-gray-400/75 select-none"
+	>
+		<div class="text-4.5 list-icon-arrow-up"></div>
+		<p>Take a new note</p>
 	</div>
 </template>

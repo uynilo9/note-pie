@@ -1,6 +1,6 @@
 import * as vue from 'vue';
 
-export const noteDatas: vue.Reactive<Note[]> = vue.reactive([
+export const noteData: vue.Ref<Note[]> = vue.ref([
 	{
 		info: {
 			title: 'Hello from Note-pie 🥧',

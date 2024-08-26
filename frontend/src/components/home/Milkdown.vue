@@ -4,6 +4,7 @@
 	import * as milkdown from '@milkdown/vue';
 	import { Editor, rootCtx, defaultValueCtx } from '@milkdown/core';
 	import { replaceAll } from '@milkdown/utils';
+	import { listener, listenerCtx } from '@milkdown/plugin-listener';
 	import { history, historyKeymap } from '@milkdown/plugin-history';
 	import { indent , indentConfig, IndentConfigOptions } from '@milkdown/plugin-indent';
 	import { cursor } from '@milkdown/plugin-cursor';
@@ -29,15 +30,24 @@
 	const colour = '#81a1c1';
 
 	import * as vue from 'vue';
+	import * as pinia from 'pinia';
 
 	import * as store from '@store/stores';
 	const noteStore = store.useNoteStore();
+	const { selectedNoteIndex } = pinia.storeToRefs(noteStore);
 
 	const editor = milkdown.useEditor((root) => {
 		return Editor.make()
 			.config((context) => {
 				context.set(rootCtx, root);
 				context.set(defaultValueCtx, '');
+			})
+			.use(listener)
+			.config((context) => {
+				const listener = context.get(listenerCtx);
+				listener.markdownUpdated((_, newContent, oldContent) => {
+					if (newContent !== oldContent) noteStore.updateNote(newContent);
+				});
 			})
 			.use(history)
 			.config((context) => {
@@ -69,12 +79,22 @@
 			});
 	});
 
-	vue.watchEffect(() => {
+	vue.watch(selectedNoteIndex, () => {
 		editor.get()?.action(replaceAll(noteStore.selectedNoteContent ?? ''));
 	});
+
+	// import { Crepe } from '@milkdown/crepe';
+	// import "@milkdown/crepe/theme/common/style.css";
+	// const crepe = new Crepe({
+	// 	root: '#editor',
+	// 	defaultValue: '# Hello world',
+	// });
+	// crepe.create();
+
 </script>
 <template>
 	<Milkdown
+		v-if="!noteStore.noNoteData"
 		class="min-w-100% outline-none caret-[#81a1c1] selection:bg-[#81a1c1]/50 prose prose-light"
 		spellcheck="false"
 	/>
