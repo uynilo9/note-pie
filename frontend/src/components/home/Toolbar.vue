@@ -22,7 +22,7 @@
 		</div>
 		<div
 			class="gap-1.5"
-			:class="noteStore.noNoteData || noteStore.selectedNoteIndex === null ? '*:text-gray-50/25 *:pointer-events-none' : ''"
+			:class="noteStore.noNoteData || noteStore.noShownNote ? '*:text-gray-50/25 *:pointer-events-none' : ''"
 		>
 			<Button
 				icon="sidebar-icon-rename-note"

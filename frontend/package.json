@@ -6,8 +6,10 @@
 		"v:preview": "vite preview"
 	},
 	"dependencies": {
+		"@codemirror/commands": "^6.6.0",
+		"@codemirror/language-data": "^6.5.1",
+		"@codemirror/theme-one-dark": "^6.1.2",
 		"@milkdown/core": "^7.5.0",
-		"@milkdown/crepe": "^7.5.5",
 		"@milkdown/ctx": "^7.5.0",
 		"@milkdown/plugin-block": "^7.5.4",
 		"@milkdown/plugin-clipboard": "^7.5.0",
@@ -23,6 +25,7 @@
 		"@milkdown/transformer": "^7.5.0",
 		"@milkdown/vue": "^7.5.0",
 		"@vueuse/core": "^11.0.3",
+		"codemirror": "^6.0.1",
 		"date-fns": "^3.6.0",
 		"pinia": "^2.2.2",
 		"prism-themes": "^1.9.0",

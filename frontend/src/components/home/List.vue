@@ -16,8 +16,8 @@
 		<div
 			v-for="note in noteStore.orderedNoteList"
 			class="*:my-auto *:select-none"
-			:class="note.info.rawIndex === noteStore.selectedNoteIndex ? 'bg-zinc-600/50' : ''"
-			@click="noteStore.selectNote(note.info.rawIndex)"
+			:class="note.info.id === noteStore.shownNoteId ? 'bg-zinc-600/50' : ''"
+			@click="noteStore.selectNote(note.info.id)"
 		>
 			<b class="text-4 truncate">{{ note.info.title }}</b>
 			<div class="flex flex-row justify-between">

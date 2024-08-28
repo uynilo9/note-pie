@@ -1,9 +1,9 @@
 type Page = 'note-pie' | 'parameters';
 
 type NoteInfo = {
+	id: string;
 	title: string;
 	isPinned: boolean;
-	rawIndex: number;
 	rawEditedTime: number;
 	formattedEditedTime?: string;
 };

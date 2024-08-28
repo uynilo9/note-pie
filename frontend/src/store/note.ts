@@ -11,25 +11,12 @@ export const useNoteStore = pinia.defineStore('note', () => {
 		return noteData.value.length === 0;
 	});
 
-	const noteList = vue.computed(() => {
-		return noteData.value;
-	});
-
 	const orderedNoteList = vue.computed(() => {
-		if (!!noteList) {
-			noteList.value.forEach((note, index) => {
-				note.info.rawIndex = index;
-				// TODO: Use store here to specify the format of time
-				note.info.formattedEditedTime = datefns.format(
-					note.info.rawEditedTime,
-					'HH:mm - MMM Qo, yyyy'
-				);
-			});
-
-			const pinnedNotes = noteList.value.filter(
+		if (!!noteData) {
+			const pinnedNotes = noteData.value.filter(
 				(note) => note.info.isPinned
 			);
-			const nonpinnedNotes = noteList.value.filter(
+			const nonpinnedNotes = noteData.value.filter(
 				(note) => !note.info.isPinned
 			);
 
@@ -44,68 +31,108 @@ export const useNoteStore = pinia.defineStore('note', () => {
 		} else return null;
 	});
 
-	const selectedNoteIndex: vue.Ref<number | null> = vue.ref(null);
+	const shownNoteId: vue.Ref<string | null> = vue.ref(null);
 
-	const selectedNoteContent = vue.computed(() => {
-		const index = selectedNoteIndex.value;
-		return index !== null ? noteList.value[index].content : null;
+	const lastShownNoteId: vue.Ref<string | null> = vue.ref(null);
+
+	vue.watch(shownNoteId, (_, oldValue) => {
+		lastShownNoteId.value = oldValue;
 	});
 
-	const selectNote = (index: number) => {
-		if (index + 1 <= noteList.value.length) selectedNoteIndex.value = index;
-		else selectedNoteIndex.value = null;
+	const noShownNote = vue.computed(() => {
+		return shownNoteId.value === null ? true : false;
+	});
+
+	const selectedNoteContent: vue.Ref<string | null> = vue.ref(null);
+
+	const selectNote = (id: string) => {
+		const target = noteData.value.find((note) => note.info.id === id);
+		if (!!target) {
+			shownNoteId.value = target.info.id;
+			selectedNoteContent.value = target.content;
+		} else {
+			shownNoteId.value = null;
+			selectedNoteContent.value = null;
+		}
 	};
 
-
 	const updateNote = (content: string) => {
-		const index = selectedNoteIndex.value;
-		if (index === null) return;
-		noteData.value[index].content = content;
-		noteData.value[index].info.rawEditedTime = new Date().getTime();
+		const id = shownNoteId.value;
+		if (id === null) return;
+		noteData.value.forEach((note) => {
+			if (note.info.id === id) {
+				note.content = content;
+				note.info.rawEditedTime = new Date().getTime();
+				note.info.formattedEditedTime = datefns.format(
+					note.info.rawEditedTime,
+					'HH:mm - MMM Qo, yyyy'
+				);
+			};
+		});
 	};
 
 	const newNote = (
 		note: Note = {
 			info: {
+				id: '',
 				title: 'Untitled note',
 				isPinned: false,
-				rawIndex: -1,
 				rawEditedTime: new Date().getTime(),
 			},
 			content: '',
 		}
 	) => {
+		note.info.formattedEditedTime = datefns.format(
+			note.info.rawEditedTime,
+			'HH:mm - MMM Qo, yyyy'
+		);
+		note.info.id = Math.random().toString(16).slice(2);
 		noteData.value.push(note);
-		selectedNoteIndex.value = null;
+		shownNoteId.value = null;
 	};
 
+	const renameNote = () => {};
+
 	const duplicateNote = () => {
-		const index = selectedNoteIndex.value;
-		if (index === null) return;
-		const note = noteData.value[index];
-		note.info.rawIndex = -1;
-		newNote(note);
+		const id = shownNoteId.value;
+		if (id === null) return;
+		const note = noteData.value.find((note) => note.info.id === id);
+		if (!note) return;
+		newNote({
+			info: {
+				id: '',
+				title: note.info.title,
+				isPinned: note.info.isPinned,
+				rawEditedTime: note.info.rawEditedTime,
+			},
+			content: note.content,
+		});
+		shownNoteId.value = null;
+		selectedNoteContent.value = null;
 	};
 
 	const deleteNote = () => {
-		const index = selectedNoteIndex.value;
-		if (index === null) return;
-		noteData.value = noteData.value.filter((item) => {
-			return item.info.rawIndex !== index;
+		const id = shownNoteId.value;
+		if (id === null) return;
+		noteData.value = noteData.value.filter((note) => {
+			return note.info.id !== id;
 		});
-		selectedNoteIndex.value = null;
+		shownNoteId.value = null;
+		selectedNoteContent.value = null;
 	};
 
 	return {
 		noteData,
 		noNoteData,
-		noteList,
 		orderedNoteList,
-		selectedNoteIndex,
+		shownNoteId,
+		lastShownNoteId,
+		noShownNote,
 		selectedNoteContent,
 		selectNote,
 		updateNote,
 		newNote,
+		renameNote,
 		duplicateNote,
 		deleteNote,
 	};
