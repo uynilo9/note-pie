@@ -17,5 +17,5 @@
 			display: none
 
 	body
-		background: rgba(40, 40, 40, 0.5)
+		background: rgba(40, 40, 40, 0.75)
 </style>
