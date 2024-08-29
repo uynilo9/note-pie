@@ -60,14 +60,13 @@ export const useNoteStore = pinia.defineStore('note', () => {
 		const id = shownNoteId.value;
 		if (id === null) return;
 		noteData.value.forEach((note) => {
-			if (note.info.id === id) {
-				note.content = content;
-				note.info.rawEditedTime = new Date().getTime();
-				note.info.formattedEditedTime = datefns.format(
-					note.info.rawEditedTime,
-					'HH:mm - MMM Qo, yyyy'
-				);
-			};
+			if (note.info.id !== id) return;
+			note.content = content;
+			note.info.rawEditedTime = new Date().getTime();
+			note.info.formattedEditedTime = datefns.format(
+				note.info.rawEditedTime,
+				'HH:mm - MMM Qo, yyyy'
+			);
 		});
 	};
 
@@ -77,11 +76,12 @@ export const useNoteStore = pinia.defineStore('note', () => {
 				id: '',
 				title: 'Untitled note',
 				isPinned: false,
-				rawEditedTime: new Date().getTime(),
+				rawEditedTime: -1,
 			},
 			content: '',
 		}
 	) => {
+		note.info.rawEditedTime = new Date().getTime();
 		note.info.formattedEditedTime = datefns.format(
 			note.info.rawEditedTime,
 			'HH:mm - MMM Qo, yyyy'
@@ -91,7 +91,17 @@ export const useNoteStore = pinia.defineStore('note', () => {
 		shownNoteId.value = null;
 	};
 
-	const renameNote = () => {};
+	const renameNote = (id: string, title: string) => {
+		noteData.value.forEach((note) => {
+			if (note.info.id !== id) return;
+			note.info.title = title;
+			note.info.rawEditedTime = new Date().getTime();
+			note.info.formattedEditedTime = datefns.format(
+				note.info.rawEditedTime,
+				'HH:mm - MMM Qo, yyyy'
+			);
+		});
+	};
 
 	const duplicateNote = () => {
 		const id = shownNoteId.value;

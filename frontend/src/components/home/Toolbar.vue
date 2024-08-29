@@ -25,10 +25,6 @@
 			:class="noteStore.noNoteData || noteStore.noShownNote ? '*:text-gray-50/25 *:pointer-events-none' : ''"
 		>
 			<Button
-				icon="sidebar-icon-rename-note"
-				title="Rename"
-			/>
-			<Button
 				icon="sidebar-icon-duplicate-note"
 				title="Duplicate"
 				@click="noteStore.duplicateNote()"

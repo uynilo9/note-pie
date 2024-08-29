@@ -19,7 +19,21 @@
 			:class="note.info.id === noteStore.shownNoteId ? 'bg-zinc-600/50' : ''"
 			@click="noteStore.selectNote(note.info.id)"
 		>
-			<b class="text-4 truncate">{{ note.info.title }}</b>
+			<b
+				class="
+					mx-0.5 text-4 outline-none
+					focus:whitespace-nowrap focus:overflow-scroll
+					not-focus:overflow-hidden not-focus:whitespace-nowrap
+					hover:cursor-text
+				"
+				spellcheck="false"
+				contentEditable="true"
+				@input="(event) => {
+					noteStore.renameNote(note.info.id,
+						(event.target as HTMLElement).innerText)
+				}"
+
+			>{{ note.info.title }}</b>
 			<div class="flex flex-row justify-between">
 				<p class="text-3">{{ note.info.formattedEditedTime }}</p>
 				<Button

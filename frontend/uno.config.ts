@@ -22,7 +22,6 @@ export default unocss.defineConfig({
 		'footer-icon-open-sidebar': 'i-tabler:layout-sidebar-left-expand',
 		'footer-icon-close-sidebar': 'i-tabler:layout-sidebar-left-collapse',
 		'sidebar-icon-new-note': 'i-tabler:note',
-		'sidebar-icon-rename-note': 'i-tabler:pencil',
 		'sidebar-icon-duplicate-note': 'i-humbleicons:documents',
 		'sidebar-icon-delete-note': 'i-tabler:trash',
 		'list-icon-arrow-up': 'i-tabler:arrow-narrow-up',
