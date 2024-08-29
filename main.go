@@ -27,6 +27,7 @@ func main() {
 			Windows: &windows.Options{
 				WindowIsTranslucent: true,
 				WebviewIsTransparent: true,
+				BackdropType: windows.Acrylic,
 			},
 			Mac: &mac.Options{
 				WindowIsTranslucent: true,
