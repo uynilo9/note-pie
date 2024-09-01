@@ -43,7 +43,7 @@ wails dev
 
 ## 🔖 Version
 
-0.0.1 (Unreleased yet)
+0.0.2
 
 ## 📜 License
 
