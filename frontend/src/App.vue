@@ -1,10 +1,18 @@
 <script lang="ts" setup>
+	import * as store from '@store/stores';
+	const navbarStore = store.useNavbarStore();
+
 	import Navbar from '@components/Navbar.vue';
 	import { RouterView as View } from 'vue-router';
 </script>
 <template>
-	<Navbar />
-	<View />
+	<div
+		class="bg-[#282828bf]"
+		:class="!navbarStore.isWindowMaximised ? 'rounded-[10px]' : ''"
+	>
+		<Navbar />
+		<View />
+	</div>
 </template>
 <style lang="sass">
 	*
@@ -15,7 +23,4 @@
 
 		::-webkit-scrollbar
 			display: none
-
-	body
-		background: rgba(40, 40, 40, 0.75)
 </style>

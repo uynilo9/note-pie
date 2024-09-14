@@ -23,11 +23,13 @@ func main() {
 			Width:  1000,
 			Height: 720,
 			Frameless: true,
+			BackgroundColour: &options.RGBA{R: 0, G: 0, B: 0, A: 0},
 
 			Windows: &windows.Options{
 				WindowIsTranslucent: true,
 				WebviewIsTransparent: true,
 				BackdropType: windows.Acrylic,
+				DisableFramelessWindowDecorations: true,
 			},
 			Mac: &mac.Options{
 				WindowIsTranslucent: true,
